@@ -114,9 +114,17 @@ body.is-over #ending{display:block!important;padding:0;text-align:left}
       body { overflow-x: hidden; }
       .shell { width: 100%; max-width: 100%; min-width: 0; }
       body.is-playing .game { display: flex !important; flex-direction: column !important; width: 100%; min-width: 0; }
-      body.is-playing .maincol, body.is-playing .sidecol { display: flex; flex: 0 0 auto; width: 100%; max-width: 100%; min-width: 0; grid-column: auto; grid-row: auto; }
-      body.is-playing .maincol { order: 0; }
-      body.is-playing .sidecol { order: 1; position: static; max-height: none; overflow: visible; }
+      body.is-playing .maincol, body.is-playing .sidecol { display: contents !important; }
+      body.is-playing .maincol > .card,
+      body.is-playing .sidecol > .card,
+      body.is-playing .sidecol > .side-tabs { width: 100%; max-width: 100%; min-width: 0; align-self: stretch; }
+      body.is-playing .maincol > .card:first-child { order: 0; }
+      body.is-playing .sidecol > .card:not([data-side-panel]) { order: 1; }
+      body.is-playing .sidecol > .side-tabs { order: 2; position: sticky; top: 0; }
+      body.is-playing .sidecol > [data-side-panel].is-active { order: 3; }
+      body.is-playing .maincol > .home-card { order: 4; }
+      body.is-playing .maincol > .shelter-card { order: 5; }
+      body.is-playing .maincol > .card:last-child { order: 6; }
       body.is-playing .pixel-scene { width: 100%; }
       body.is-playing .pixel-scene svg { width: 100%; height: auto; }
       .route-overlay, .goal-overlay { padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); }
